@@ -1,0 +1,19 @@
+.editor-material {
+  width: 300px;
+  height: inherit;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 14px;
+  border-radius: 4px;
+  .component-item {
+    display: grid;
+    place-content: center;
+    cursor: move;
+    user-select: none;
+    padding: 10px;
+    height: fit-content;
+    background-color: #dedede;
+  }
+}
