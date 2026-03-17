@@ -1,6 +1,5 @@
 <template>
   <div class="user-center-page">
-    <!-- 1. 顶部用户信息卡片 (带背景渐变) -->
     <div class="user-card">
       <div class="card-content">
         <div class="user-info">
@@ -14,7 +13,6 @@
           </div>
         </div>
 
-        <!-- 资产数据行 -->
         <div class="assets-row">
           <div class="asset-item" v-for="(item, index) in assetsList" :key="index" @click="handleAssetClick(item.type)">
             <div class="num">{{ formatNumber(item.value) }}</div>
@@ -67,6 +65,8 @@
 import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { showToast } from 'vant';
+import { useSysStore } from '@/store/modules/sysStore'
+const sysStore = useSysStore()
 
 // --- 类型定义 ---
 interface UserInfo {
@@ -131,6 +131,7 @@ const toolList = reactive<ToolItem[]>([
 ]);
 
 const handleExitLogin = () => {
+  sysStore.setUserInfos(null)
   router.push({ name: 'Login' });
 }
 

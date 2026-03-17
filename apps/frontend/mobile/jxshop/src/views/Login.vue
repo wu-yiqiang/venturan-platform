@@ -56,8 +56,10 @@
 </template>
 
 <script setup lang="ts">
+import { useSysStore } from '@/store/modules/sysStore'
 import { ref, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
+const sysStore = useSysStore()
 interface LoginForm {
   phone: string;
   code: string;
@@ -131,16 +133,15 @@ const handleLogin = async () => {
   if (!validateForm()) return;
   isLoading.value = true;
   try {
-    // 模拟 API 请求延迟
     await new Promise(resolve => setTimeout(resolve, 1500));
-    // TODO: 替换为真实的 API 调用
-    // const res = await api.login({ phone: form.phone, code: form.code });
-
-    console.log('登录成功', { phone: form.phone, code: form.code });
-
-    // 登录成功后跳转
+    // const res = await userLogin({ phone: form.phone, code: form.code });
+    const data = {
+      token: '12121',
+      username: "1212",
+      phone: '1212'
+    }
+    sysStore.setUserInfos(data)
     router.push('/home');
-    // 或者保存 token: localStorage.setItem('token', res.token);
 
   } catch (error) {
     console.error('登录失败', error);
@@ -153,6 +154,7 @@ const handleLogin = async () => {
 // 组件卸载时清理定时器
 import { onBeforeUnmount } from 'vue';
 import { error } from 'console';
+import { userLogin } from '@/api/user';
 onBeforeUnmount(() => {
   if (timer) clearInterval(timer);
 });
