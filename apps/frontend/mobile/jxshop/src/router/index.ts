@@ -2,7 +2,6 @@ import {
   createRouter,
   createWebHistory
 } from 'vue-router'
-import setPageTitle from '@/utils/set-page-title'
 import routes from './routes'
 import { useSysStore } from '@/store/modules/sysStore'
 
@@ -13,14 +12,14 @@ const router = createRouter({
 
 router.beforeEach((to, _from, next) => {
   const sysStore = useSysStore()
-  const userInfos = sysStore.userInfos
-  console.log('tototo', sysStore.userInfos)
+  const userInfos = sysStore.userInfos as any
   if (to.path === '/login') {
     next()
-  }else if (!userInfos?.token) {
+  } else if (!userInfos?.token) {
     next('/login')
+  } else {
+    next()
   }
-  next()
 })
 
 export default router

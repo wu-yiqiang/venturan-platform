@@ -15,6 +15,6 @@ import 'virtual:svg-icons-register'
 initializeDarkMode()
 
 const app = createApp(App)
-app.use(store).use(router)
+app.use(store as any).use(router)
 
 app.mount('#app')

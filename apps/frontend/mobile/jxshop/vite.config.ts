@@ -9,14 +9,10 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig, loadEnv } from 'vite'
 import viteCompression from 'vite-plugin-compression'
 import { createHtmlPlugin } from 'vite-plugin-html'
-import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import { enableCDN } from './build/cdn'
 
-// 当前工作目录路径
 const root: string = process.cwd()
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // 环境变量
   const env = loadEnv(mode, root, '')

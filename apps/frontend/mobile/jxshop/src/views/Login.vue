@@ -22,7 +22,7 @@
           <label class="input-label">密码</label>
           <div class="input-wrapper">
             <span class="prefix-icon">🔒</span>
-            <input type="text" v-model="form.code" placeholder="请输入密码" minlength="8" maxlength="16" class="custom-input"
+            <input type="password" v-model="form.code" placeholder="请输入密码" minlength="8" maxlength="16" class="custom-input"
               :class="{ error: errors.code }" />
           </div>
           <span v-if="errors.code" class="error-msg">{{ errors.code }}</span>

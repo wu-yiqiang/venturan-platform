@@ -12,7 +12,8 @@
     "start:jsms": "pnpm run --F @venturan-platform/jxms start",
     "start:jxshop": "pnpm run --F @venturan-platform/jxshop start",
     "start:lowcode": "pnpm run --F @venturan-platform/lowcode start",
-    "build:flow:test": "pnpm run --F @venturan-platform/flow build:test"
+    "build:flow:test": "pnpm run --F @venturan-platform/flow build:test",
+    "build:jxshop:test": "pnpm run --F @venturan-platform/jxshop build:test"
   },
   "dependencies": {
     "@venturan-platform/root": "file:",
