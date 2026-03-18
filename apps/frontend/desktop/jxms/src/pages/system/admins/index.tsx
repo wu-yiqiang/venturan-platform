@@ -1,8 +1,8 @@
 import Tabular from '@/components/Tabular.tsx'
 import { getUsersLists, deleteUserItem, getRoleOptions } from '@/api/system'
 import { useEffect, useState } from 'react'
-import { UserSearch, UserItem } from '@/types/user'
-import UserAddDialog from './user-dialog'
+import { AdminSearch, AdminItem } from '@/types/admin'
+import UserAddDialog from './admin-dialog'
 import { Button, Space } from 'antd'
 import { EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons'
 import Toast from '@/components/Toast'
@@ -21,7 +21,7 @@ export default function UserManager() {
   const [resetDialogOpen, setResetDialogOpen] = useState(false)
   const [userId, setUserId] = useState<number | null>(null)
   const [total, setTotal] = useState(0)
-  const [queryData, setQueryData] = useState<UserSearch>({
+  const [queryData, setQueryData] = useState<AdminSearch>({
     search: '',
     pageNo: 1,
     pageSize: 10
@@ -87,7 +87,7 @@ export default function UserManager() {
       title: '操作',
       dataIndex: 'opeartions',
       key: 'opeartions',
-      render: (value: number | string, record: UserItem, index: number) => {
+      render: (value: number | string, record: AdminItem, index: number) => {
         return (
           <Space key={index}>
             <Button icon={<EditOutlined />} onClick={() => handleEdit(record?.id)} />
@@ -99,7 +99,7 @@ export default function UserManager() {
     }
   ]
   const searchOptions = [{ name: 'search', label: t('Search'), type: 'input' }]
-  const handleSearch = async (values: UserSearch) => {
+  const handleSearch = async (values: AdminSearch) => {
     const { data } = await getUsersLists(values)
     setLists(data?.data)
     const datas = {

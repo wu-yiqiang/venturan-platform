@@ -1,7 +1,7 @@
 import Tabular from '@/components/Tabular.tsx'
 import { getIntefacesPage, deleteIntefaceItem } from '@/api/system'
 import { useEffect, useState } from 'react'
-import { UserSearch, UserItem } from '@/types/user'
+import { AdminSearch, AdminItem } from '@/types/admin.ts'
 import ConnectorDialog from './connector-dialog.tsx'
 import { Button, Space } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
@@ -15,7 +15,7 @@ export default function IntefaceManager() {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [userId, setUserId] = useState<number | null>(null)
   const [total, setTotal] = useState(0)
-  const [queryData, setQueryData] = useState<UserSearch>({
+  const [queryData, setQueryData] = useState<AdminSearch>({
     search: '',
     pageNo: 1,
     pageSize: 10
@@ -58,7 +58,7 @@ export default function IntefaceManager() {
       key: 'opeartions',
       width: 150,
       align: 'center',
-      render: (value: number | string, record: UserItem, index: number) => {
+      render: (value: number | string, record: AdminItem, index: number) => {
         return (
           <Space key={index}>
             <Button icon={<EditOutlined />} onClick={() => handleEdit(record?.id)} />
@@ -69,7 +69,7 @@ export default function IntefaceManager() {
     }
   ]
   const searchOptions = [{ name: 'search', label: t('Search'), type: 'input' }]
-  const handleSearch = async (values: UserSearch) => {
+  const handleSearch = async (values: AdminSearch) => {
     const { data, total, pageSize, pageNo } = await getIntefacesPage(values)
     setLists(data)
     const datas = {

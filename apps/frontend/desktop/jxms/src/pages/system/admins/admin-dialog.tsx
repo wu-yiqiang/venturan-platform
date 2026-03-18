@@ -5,7 +5,7 @@ import { upload } from '@/api/public'
 import Toast from '@/components/Toast'
 import { PlusOutlined, LoadingOutlined, UserOutlined } from '@ant-design/icons'
 import { emailRequiredRules, requiredRules } from '@/validator/index'
-import { User } from '@/types/user'
+import { Admin } from '@/types/admin'
 import { DialogProps } from '@/types/common'
 import DictsSelector from '@/components/DictsSelector'
 import ImgCrop from 'antd-img-crop'
@@ -40,7 +40,7 @@ export default function UserAddDialog(props: DialogProps) {
     if (!id) {
       await setTitle('新增')
       setEditStatus(false)
-      form.setFieldsValue(new User())
+      form.setFieldsValue(new Admin())
     }
     if (id) {
       await setTitle('编辑')

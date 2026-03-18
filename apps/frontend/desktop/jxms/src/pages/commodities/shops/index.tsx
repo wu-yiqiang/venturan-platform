@@ -1,7 +1,7 @@
 import Tabular from '@/components/Tabular.tsx'
 import { getUsersLists, deleteUserItem, getRoleOptions } from '@/api/system'
 import { useEffect, useState } from 'react'
-import { UserSearch, UserItem } from '@/types/user'
+import { AdminSearch, AdminItem } from '@/types/admin'
 import ShopDialog from './shop-dialog'
 import { Button, Space } from 'antd'
 import { EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons'
@@ -20,7 +20,7 @@ export default function ShopManager() {
   const searchOptions = [{ name: 'search', label: t('Search'), type: 'input' }]
   const [userId, setUserId] = useState<number | null>(null)
   const [total, setTotal] = useState(0)
-  const [queryData, setQueryData] = useState<UserSearch>({
+  const [queryData, setQueryData] = useState<AdminSearch>({
     search: '',
     pageNo: 1,
     pageSize: 10
@@ -69,7 +69,7 @@ export default function ShopManager() {
       title: '操作',
       dataIndex: 'opeartions',
       key: 'opeartions',
-      render: (value: number | string, record: UserItem, index: number) => {
+      render: (value: number | string, record: AdminItem, index: number) => {
         return (
           <Space key={index}>
             <Authority permission="commodities:shop:edit">
@@ -83,7 +83,7 @@ export default function ShopManager() {
       }
     }
   ]
-  const handleSearch = async (values: UserSearch) => {
+  const handleSearch = async (values: AdminSearch) => {
     const { data } = await getShopPages(values)
     setLists(data?.data)
     const datas = {

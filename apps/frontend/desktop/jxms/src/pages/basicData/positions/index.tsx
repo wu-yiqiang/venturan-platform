@@ -1,7 +1,7 @@
 import Tabular from '@/components/Tabular.tsx'
 import { getRolesLists, deleteRoleItem } from '@/api/system'
 import { useState } from 'react'
-import { UserSearch } from '@/types/user'
+import { AdminSearch } from '@/types/admin'
 import RoleAddDialog from './position-dialog'
 import { Button, Space } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
@@ -12,7 +12,7 @@ export default function PositionManager() {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [roleId, setRoleId] = useState<number | null>(null)
   const [total, setTotal] = useState(0)
-  const [queryData, setQueryData] = useState<UserSearch>({
+  const [queryData, setQueryData] = useState<AdminSearch>({
     search: '',
     pageNo: 1,
     pageSize: 10

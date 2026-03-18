@@ -23,7 +23,7 @@ const Shops = React.lazy(() => import('@/pages/commodities/shops'))
 const OrderLists = React.lazy(() => import('@/pages/orders/orderLists'))
 
 // System
-const Users = React.lazy(() => import('@/pages/system/users/index'))
+const Admins = React.lazy(() => import('@/pages/system/admins/index'))
 const Roles = React.lazy(() => import('@/pages/system/roles/index'))
 const Menus = React.lazy(() => import('@/pages/system/menus/index'))
 const Buttons = React.lazy(() => import('@/pages/system/buttons/index'))
@@ -216,12 +216,12 @@ export const allRouters: Array<RouterItem> = [
     element: null
   },
   {
-    path: '/systems/users',
-    label: '用户管理',
+    path: '/systems/admins',
+    label: '账号管理',
     icon: <UserOutlined />,
-    key: 'users',
+    key: 'admins',
     parentkey: 'systems',
-    element: <Users />
+    element: <Admins />
   },
   {
     path: '/systems/roles',

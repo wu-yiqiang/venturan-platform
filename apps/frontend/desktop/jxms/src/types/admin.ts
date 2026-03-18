@@ -1,5 +1,5 @@
 import { CommonTime, CommonUuid, CommonId, Search, Pagenation } from "@/types/common";
-export interface UserField {
+export interface AdminField {
   username: string
   email: string
   gender: string
@@ -9,15 +9,15 @@ export interface UserField {
   avatar: string
   roles: number[]
 }
-export interface UserSearch extends Search, Pagenation {}
-export interface UserItem extends CommonTime, CommonUuid, CommonId, UserField { }
+export interface AdminSearch extends Search, Pagenation {}
+export interface AdminItem extends CommonTime, CommonUuid, CommonId, AdminField { }
 
 // type MyPick<T, K extends keyof T> = {
 //   [P in K]: T[P]
 // }
 // export type A = MyPick<UserItem, 'username' | 'email'>
 
-export class User implements UserItem {
+export class Admin implements AdminItem {
   id: number | null;
   uuid: string;
   username: string;

@@ -1,14 +1,14 @@
 
 import requestes from '@/network/request'
-import { UserItem, UserSearch } from '@/types/user'
+import { AdminItem, AdminSearch } from '@/types/admin'
 import { RoleItem, RoleSearch } from '@/types/role'
 import { MenuSearch } from '@/types/menu'
 
 // 用户管理
-export const getUsersLists = async (data: UserSearch): Promise<any> => {
+export const getUsersLists = async (data: AdminSearch): Promise<any> => {
   return await requestes.Post(`/admin/page`, data)
 }
-export const postUser = async (data: UserItem): Promise<any> => {
+export const postUser = async (data: AdminItem): Promise<any> => {
   return await requestes.Post(`/admin/create`, data)
 }
 
@@ -17,15 +17,15 @@ export const getUserDetail = async (id: number): Promise<any> => {
   return await requestes.Get(`/admin/detail/${id}`)
 }
 
-export const updateUserDetail = async (data: UserItem): Promise<any> => {
+export const updateUserDetail = async (data: AdminItem): Promise<any> => {
   if (!data?.id) return
   return await requestes.Put(`/admin/update`, data)
 }
-export const updateUserPassword = async (data: UserItem): Promise<any> => {
+export const updateUserPassword = async (data: AdminItem): Promise<any> => {
   if (!data?.id) return
   return await requestes.Post(`/admin/update/password`, data)
 }
-export const updateUserAvatar = async (data: UserItem): Promise<any> => {
+export const updateUserAvatar = async (data: AdminItem): Promise<any> => {
   if (!data?.id) return
   return await requestes.Post(`/admin/update_avatar`, data)
 }
