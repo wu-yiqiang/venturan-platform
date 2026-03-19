@@ -3,7 +3,7 @@ import { http } from '@/utils/http'
 
 // 获取门店列表
 export function getShops() {
-  return http.get<any>('/shop/list')
+  return http.post<any>('/shop/list')
 }
 
 // 获取门店列表
@@ -12,6 +12,10 @@ export function getShopDetails(shopId: number) {
 }
 
 // 获取门店商品列表
+export function getShopDetail(shopId: number) {
+    return http.get<any>(`/shop/details/${shopId}`)
+}
+
 export function getShopCommodities(shopId: number) {
-    return http.get<any>(`/details/${shopId}`)
+  return http.post<any>(`/commodity/list`, {shopId})
 }

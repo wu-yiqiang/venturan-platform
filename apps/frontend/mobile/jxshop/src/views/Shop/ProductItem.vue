@@ -1,7 +1,7 @@
 <!-- src/components/ProductItem.vue -->
 <template>
   <div class="product-item">
-    <img :src="item.image" alt="商品图" class="product-img" />
+    <img :src="avatar(item.fileName)" alt="商品图" class="product-img" />
     <div class="product-info">
       <h3 class="product-title">{{ item?.name }}</h3>
       <p class="product-desc">{{ item?.desc }}</p>
@@ -11,36 +11,33 @@
       </div>
     </div>
     <div class="product-action">
-      <button class="btn-minus" @click="decrease(item)">−</button>
+      <button :disabled="item.count <= 0" class="btn-minus" @click="decrease(item)">−</button>
       <span class="count">{{ item?.count }}</span>
-      <button class="btn-plus" @click="increase(item)">+</button>
+      <button :disabled="item.count >= item?.inventory" class="btn-plus" @click="increase(item)">+</button>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'ProductItem',
-  props: {
-    item: {
-      type: Object,
-      required: true,
-    },
+<script lang="ts" setup>
+const props = defineProps({
+  item: {
+    type: Object,
+    required: true,
   },
-  emits: ['update-count'],
-  methods: {
-    decrease(item: any) {
-      if (item.count > 0) {
-        item.count--;
-        this.$emit('update-count');
-      }
-    },
-    increase(item: any) {
-      item.count++;
-      this.$emit('update-count');
-    },
-  },
-};
+})
+const emit = defineEmits(['update-count'])
+const avatar = (fileName: string) => {
+  if (!fileName) return ''
+  return import.meta.env.VITE_STORAGE_BASE_URL + fileName
+}
+const decrease = (item: any) => {
+  item.count--;
+  emit('update-count');
+}
+const increase = (item: any) => {
+  item.count++;
+  emit('update-count');
+}
 </script>
 
 <style lang="scss" scoped>
@@ -48,6 +45,7 @@ export default {
   display: flex;
   padding: 16px 0;
   border-bottom: 1px solid #eee;
+
   &:last-child {
     border-bottom: none;
   }
@@ -82,11 +80,13 @@ export default {
 
     .product-price {
       margin-top: 8px;
+
       .price-now {
         font-size: 18px;
         color: #f44;
         font-weight: bold;
       }
+
       .price-old {
         font-size: 14px;
         color: #999;
@@ -112,6 +112,7 @@ export default {
       font-size: 18px;
       cursor: pointer;
       transition: all 0.2s;
+
       &:hover {
         background: rgba(244, 68, 68, 0.1);
       }

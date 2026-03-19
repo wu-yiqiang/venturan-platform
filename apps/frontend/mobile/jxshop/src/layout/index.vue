@@ -9,9 +9,10 @@ const { theme } = storeToRefs(darkModeStore)
   <div class="app-wrapper">
     <van-config-provider>
       <router-view v-slot="{ Component }">
-        <keep-alive>
+        <!-- <keep-alive>
           <component :is="Component" />
-        </keep-alive>
+        </keep-alive> -->
+        <component :is="Component" />
       </router-view>
       <tabbar />
     </van-config-provider>
@@ -23,8 +24,8 @@ const { theme } = storeToRefs(darkModeStore)
 
 .app-wrapper {
   .clearfix();
-  position: relative;
   height: 100%;
+  overflow: hidden;
   width: 100%;
 }
 </style>

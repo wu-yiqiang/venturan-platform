@@ -2,7 +2,7 @@ import Tabular from '@/components/Tabular.tsx'
 import { useState } from 'react'
 import CommodityDialog from './commodity-dialog'
 import { Button, Space } from 'antd'
-import { EditOutlined, DeleteOutlined, ArrowUpOutlined } from '@ant-design/icons'
+import { EditOutlined, DeleteOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons'
 import Toast from '@/components/Toast'
 import { deleteCommodityItem, getCommodityPages, putCommodityUp } from '@/api/commodity'
 import { CommodityItem, CommoditySearch } from '@/types/commodity'
@@ -97,16 +97,21 @@ export default function CommodityLists() {
       render: (value: number | string, record: CommodityItem, index: number) => {
         return (
           <Space key={index}>
-            <Authority permission="commodities:commodity:delete">
-              {record.status === CommodityStatus.NotAvailable ? <Button icon={<ArrowUpOutlined />} onClick={() => handleUp(record?.id)} />
+            <Authority permission="commodities:commodity:edit">
+              {record.status === CommodityStatus.NotAvailable || record.status === CommodityStatus.Removed ? <Button icon={<ArrowUpOutlined />} onClick={() => handleUp(record?.id)} />
                 : null}
             </Authority>
             <Authority permission="commodities:commodity:edit">
-              <Button icon={<EditOutlined />} onClick={() => handleEdit(record?.id)} />
+              {record.status === CommodityStatus.NotAvailable || record.status === CommodityStatus.Removed ? <Button icon={<EditOutlined />} onClick={() => handleEdit(record?.id)} />
+                : null}
             </Authority>
             <Authority permission="commodities:commodity:delete">
+              {record.status === CommodityStatus.NotAvailable ?
+                <Button icon={<DeleteOutlined />} type="primary" danger ghost onClick={() => handleDelete(record?.id)} /> : null}
+            </Authority>
+            <Authority permission="commodities:commodity:edit">
               {record.status === CommodityStatus.Available ?
-                null : <Button icon={<DeleteOutlined />} type="primary" danger ghost onClick={() => handleDelete(record?.id)} />}
+                <Button icon={<ArrowDownOutlined />} onClick={() => handleDown(record?.id)} /> : null}
             </Authority>
           </Space>
         )
@@ -148,8 +153,16 @@ export default function CommodityLists() {
       status: CommodityStatus.Available
     }
     await putCommodityUp(reqParams)
-    Toast.success('上架成功')
-    console.log('上架', queryData)
+    Toast.success('商品上架成功')
+    await handleSearch({ ...queryData })
+  }
+  const handleDown = async (id: number | null) => {
+    const reqParams = {
+      id: id,
+      status: CommodityStatus.Removed
+    }
+    await putCommodityUp(reqParams)
+    Toast.success('商品下架成功')
     await handleSearch({ ...queryData })
   }
   const handleOk = async () => {

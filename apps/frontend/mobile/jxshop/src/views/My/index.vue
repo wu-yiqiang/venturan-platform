@@ -102,11 +102,11 @@ interface ToolItem {
 const router = useRouter();
 const defaultAvatar = computed(() => {
   const ava = sysStore.userInfos?.avatar
-  return import.meta.env.VITE_STORAGE_BASE_URL+"/"+ava;
+  if (!ava) return ''
+  return import.meta.env.VITE_STORAGE_BASE_URL+ava;
 })
 const userName = computed(() => {
    const name = sysStore.userInfos?.name
-  console.log('sdsd', sysStore.userInfos)
   return name;
 })
 // 模拟用户状态

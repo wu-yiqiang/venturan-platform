@@ -4,6 +4,7 @@ import { showFailToast } from 'vant'
 import { ContentTypeEnum, ResultEnum } from '@/enums/request-enum'
 import NProgress from '../progress'
 import 'vant/es/toast/style'
+import { useSysStore } from '@/store/modules/sysStore'
 const configDefault: AxiosRequestConfig = {
   headers: {
     'Content-Type': ContentTypeEnum.JSON,
@@ -34,10 +35,11 @@ const axiosInstance: AxiosInstance = Axios.create(configDefault)
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     NProgress.start()
-    // 发送请求前，可在此携带 token
-    // if (token) {
-    //   config.headers['token'] = token
-    // }
+    const sysStore = useSysStore()
+    const token = sysStore.userInfos?.token
+    if (token) {
+      config.headers['Authorization'] = token
+    }
     return config
   },
   (error: AxiosError) => {

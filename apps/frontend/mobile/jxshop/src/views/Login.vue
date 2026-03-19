@@ -136,6 +136,8 @@ const handleLogin = async () => {
   try {
     const res = await userLogin({ mobile: form.phone, password: form.code });
     sysStore.setUserInfos(res)
+    const data = await getDictionaryItemByType('ShopStatus')
+    sysStore.setShopStatus(data)
     router.push('/home');
   } catch (error) {
     showFailToast('登陆失败请联系商城管理员')
@@ -154,6 +156,7 @@ const handleLoginStatus = () => {
 import { onBeforeUnmount } from 'vue';
 import { userLogin } from '@/api/user';
 import { showFailToast } from 'vant';
+import { getDictionaryItemByType } from '@/api/public';
 onBeforeUnmount(() => {
   if (timer) clearInterval(timer);
 });

@@ -15,15 +15,22 @@ body {
     sans-serif;
   color: var(--van-text-color);
   background-color: var(--color-background-2);
+  --van-popup-round-radius: 4px;
+  touch-action: manipulation;
+  overscroll-behavior: contain;
 }
-
+* {
+  -webkit-touch-action: manipulation;
+  -webkit-touch-callout: none;
+}
 html {
-  height: 100%;
   box-sizing: border-box;
 }
 
 #app {
   height: 100%;
+  touch-action: manipulation;
+  overscroll-behavior: contain;
 }
 
 a,
@@ -34,7 +41,6 @@ a:hover {
   text-decoration: none;
 }
 
-// see https://github.com/vuejs/vitepress/pull/2347
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;

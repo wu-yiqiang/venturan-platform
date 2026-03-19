@@ -39,7 +39,8 @@
     "pinia-plugin-persistedstate": "^4.7.1",
     "sass": "^1.98.0",
     "tailwind-merge": "^2.6.0",
-    "vant": "^4.9.21"
+    "vant": "^4.9.21",
+    "lodash-es": "^4.17.23"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.2.0",
