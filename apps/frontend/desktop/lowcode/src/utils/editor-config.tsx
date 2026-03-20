@@ -38,6 +38,7 @@ registerConfig.register({
 })
 
 registerConfig.register({
+  value: '',
   label: '按钮',
   icon: () => (
     <el-icon>
@@ -61,7 +62,7 @@ registerConfig.register({
     </el-icon>
   ),
   preview: () => <ElInput placeholder="预览输入框" />,
-  render: () => <ElInput placeholder="渲染输入框" />,
+  render: (props: any) => <ElInput {...props} placeholder="渲染输入框" />,
   key: ComponentTypeEnum.INPUT,
   props: {
     text: '输入框'
@@ -131,7 +132,7 @@ export const basicComponents = [
       </el-icon>
     ),
     preview: () => <ElInput placeholder="预览输入框" />,
-    render: (value: string) => <ElInput v-model="value" placeholder="渲染输入框" />,
+    render: (value: string) => <ElInput placeholder="渲染输入框" />,
     key: ComponentTypeEnum.INPUT,
     props: {
     }

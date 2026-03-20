@@ -26,7 +26,7 @@
     <div class="middle-actions">
       <el-space>
         <el-tooltip effect="light" content="导入" placement="bottom">
-          <el-button :icon="EditPen" circle @click="handleOpeartion('import')" />
+          <el-button :icon="Top" circle @click="handleOpeartion('import')" />
         </el-tooltip>
         <el-tooltip effect="light" content="导出" placement="bottom">
           <el-button :icon="Download" circle  @click="handleOpeartion('export')" />
@@ -35,10 +35,10 @@
           <el-button :icon="CopyDocument" circle @click="handleOpeartion('copy')" />
         </el-tooltip> -->
         <el-tooltip effect="light" content="撤销" placement="bottom">
-          <el-button :icon="Back" circle @click="handleOpeartion('withdraw')" />
+          <el-button :icon="Back" circle @click="handleOpeartion('rollback')" />
         </el-tooltip>
-        <el-tooltip effect="light" content="刷新" placement="bottom">
-          <el-button :icon="RefreshLeft" circle @click="handleOpeartion('flush')" />
+        <el-tooltip effect="light" content="重做" placement="bottom">
+          <el-button :icon="RefreshLeft" circle @click="handleOpeartion('repetition')" />
         </el-tooltip>
         <el-tooltip effect="light" content="查看" placement="bottom">
           <el-button :icon="View" circle @click="handleOpeartion('view')" />
@@ -52,11 +52,10 @@
   </section>
 </template>
 <script lang="ts" setup>
-import { Back, Edit, RefreshLeft, EditPen, View, Select, Download } from '@element-plus/icons-vue';
-import { ref } from 'vue';
+import { Back, Edit, RefreshLeft, EditPen, View, Select, Download, Top } from '@element-plus/icons-vue';
 const emit = defineEmits(['copy', 'withdraw', 'flush', 'view', 'export', 'import'])
-const editable = ref(false)
-const fileName = ref('demo1')
+// const editable = ref(false)
+// const fileName = ref('demo1')
 const handleBack = () => { }
 const handleOpeartion = (operation: string) => {
   emit(operation)

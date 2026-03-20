@@ -1,5 +1,5 @@
 <template>
-  <EditorTop @withdraw="handleWithDraw" @export="handleExport" @import="handleImport" @view="handleView"/>
+  <EditorTop @rollback="handleRollback" @export="handleExport" @import="handleImport" @view="handleView" @repetition="handleRepetition"/>
   <div class="editor">
     <EditMaterial :componentList="config?.componentList" v-model="data" />
     <div class="editor-container">
@@ -16,7 +16,7 @@
     <EditorPannel :block="lastSelectBlock" :form="value.container" />
   </div>
   <JsonViewDialog v-model:visible="exportVisible" :jsonDatas="jsonDatas" />
-  <JsonEditDialog v-model:visible="importVisible" />
+  <JsonEditDialog v-model:visible="importVisible" @ok="handleExportSuccess"/>
   <ViewDailog  v-model:visible="viewVisible" :jsonDatas="jsonDatas" />
 </template>
 <script lang="ts" setup>
@@ -28,6 +28,8 @@ import EditorTop from './components/EditTopbar/index.vue'
 import EditorBlock from './editor-block'
 import ViewDailog from './components/EditTopbar/components/ViewDailog.vue';
 import { useBlockFocus } from './hooks/useBlockFocus.ts'
+import { cloneDeep } from 'lodash-es';
+import initDatas from '@/components/data.json';
 const emit = defineEmits(['update:value'])
 const props = defineProps({
   value: {
@@ -102,7 +104,6 @@ const mouseup = (e: Event) => {
   document.removeEventListener('mouseup', mouseup)
   markLine.value.x = null
   markLine.value.y= null
-
 }
 const mousemove = (e: Event) => {
   let { clientX: moveX, clientY: moveY } = e
@@ -135,8 +136,11 @@ const mousemove = (e: Event) => {
     block.left = dragState.startPosition[index].left + durX
   })
 }
+const handleRepetition = () => {
+  emit('update:value', cloneDeep(initDatas))
 
-const handleWithDraw = () => {
+}
+const handleRollback = () => {
   
 }
 const handleView = () => {
@@ -148,7 +152,9 @@ const handleExport = () => {
   jsonDatas.value = data?.value ?? ''
   exportVisible.value = true
 }
-
+const handleExportSuccess = (data: string) => {
+  emit('update:value', data)
+}
 const handleImport = () => {
   importVisible.value = true
 }

@@ -21,7 +21,7 @@
 import VueJsonPretty from 'vue-json-pretty'
 import 'vue-json-pretty/lib/styles.css'
 import message from 'element-plus/es/components/message/index.mjs';
-const emit = defineEmits(['update:visible']);
+const emit = defineEmits(['update:visible', 'ok']);
 const props = defineProps({
   visible: {
     type: Boolean,
@@ -39,6 +39,10 @@ const open = computed({
 const jsonDatas = ref({})
 const handleClose = () => {
   open.value = false
+}
+const handleOk = (data: any) => {
+  emit('ok', data)
+  handleClose()
 }
 
 const handlePaste = async () => {
@@ -64,7 +68,7 @@ const handleSave = () => {
     message: '导入成功',
     type: 'success'
   });
-  handleClose()
+  handleOk(jsonDatas.value)
 }
 </script>
 <style lang="scss">

@@ -3,13 +3,14 @@ import { provide, ref } from 'vue';
 import {registerConfig} from './utils/editor-config.tsx';
 import data from './components/data.json';
 import Editor from './packages/editor.vue';
-const formState = ref(data);
+import { cloneDeep } from 'lodash-es';
+const formState = ref(cloneDeep(data));
 provide('config', registerConfig)
 </script>
 
 <template>
   <div class="app">
-    <Editor v-model:value="formState" />
+    <Editor v-model:value="formState"/>
   </div>
 </template>
 

@@ -64,7 +64,7 @@ const handleClose = () => {
   .editor-container {
     padding: 0;
     border-radius: 4px;
-    border:1px solid rgb(180, 179, 179);
+    border:1px solid rgb(226, 225, 225);
     .editor-container-canvas_content {
       position: relative;
     }

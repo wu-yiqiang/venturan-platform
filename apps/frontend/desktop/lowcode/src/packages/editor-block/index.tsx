@@ -29,13 +29,15 @@ export default defineComponent({
       }
       props.block.width = offsetWidth
       props.block.height = offsetHeight
+      props.block.value = ''
     })
+    const llll = ref('1212')
     return () => {
       const component = config.componentMap[props?.block.key]
       const RenderComponent = component.render()
       return (
         <div ref={blockRef} class="editor-block" style={blockStyles.value}>
-          {RenderComponent}
+          <RenderComponent value={llll.value} />
         </div>
       )
     }
