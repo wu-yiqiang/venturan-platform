@@ -1,7 +1,9 @@
 <template>
-  <el-dialog v-model="open" title="效果预览" class="fullscreen" :before-close="handleClose">
-    <div class="editor-container-canvas_content" :style=containerStyles>
-      <EditorBlock v-for="(block, index) in editorDatas?.blocks" :block="block" :key="index" />
+  <el-dialog v-model="open" title="效果预览" :width="dialogBodyWidth" :before-close="handleClose">
+    <div class="editor-container">
+      <div class="editor-container-canvas_content" :style=containerStyles>
+        <EditorBlock v-for="(block, index) in editorDatas?.blocks" :block="block" :key="index" />
+      </div>
     </div>
     <template #footer>
       <el-button @click="handleClose">Close</el-button>
@@ -32,12 +34,10 @@ const open = computed({
   }
 })
 const editorDatas = computed(() => {
-  console.log("ss", props.jsonDatas)
   return props.jsonDatas
 })
 const containerStyles = computed({
   get() {
-    console.log("sdsd", props.jsonDatas)
     return {
       width: editorDatas.value?.container?.width + 'px',
       height: editorDatas.value?.container?.height + 'px'
@@ -45,25 +45,30 @@ const containerStyles = computed({
   },
   set() { }
 })
+const dialogBodyWidth = computed(() => {
+  return (editorDatas.value?.container?.width + 40) + 'px'
+})
 const handleClose = () => {
   open.value = false
 }
 
 </script>
 
-<style lang="scss">
-.fullscreen {
-  display: flex;
-  flex-direction: column;
-  overflow-y: hidden;
-
-  .el-dialog__body {
-    flex: 1;
-    overflow: auto;
-
+<style lang="scss" scoped>
+.el-dialog__body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  place-items: center;
+  .editor-container {
+    padding: 0;
+    border-radius: 4px;
+    border:1px solid rgb(180, 179, 179);
     .editor-container-canvas_content {
       position: relative;
     }
   }
+
 }
 </style>

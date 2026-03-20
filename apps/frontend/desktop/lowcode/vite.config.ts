@@ -29,7 +29,7 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
-    port: 6688,
+    port: 7799,
     https: true,
     hmr: true
   }

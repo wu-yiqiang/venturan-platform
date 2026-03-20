@@ -22,6 +22,7 @@ const createEditorConfig = () => {
 
 export let registerConfig = createEditorConfig()
 registerConfig.register({
+  value: '',
   label: '文本',
   icon: () => (
     <el-icon>
@@ -52,6 +53,7 @@ registerConfig.register({
 })
 
 registerConfig.register({
+  value: '',
   label: '输入框',
   icon: () => (
     <el-icon>
@@ -67,6 +69,7 @@ registerConfig.register({
 })
 
 registerConfig.register({
+  value: '',
   label: '选择器',
   icon: () => (
     <el-icon size="20">
@@ -128,7 +131,7 @@ export const basicComponents = [
       </el-icon>
     ),
     preview: () => <ElInput placeholder="预览输入框" />,
-    render: () => <ElInput placeholder="渲染输入框" />,
+    render: (value: string) => <ElInput v-model="value" placeholder="渲染输入框" />,
     key: ComponentTypeEnum.INPUT,
     props: {
     }

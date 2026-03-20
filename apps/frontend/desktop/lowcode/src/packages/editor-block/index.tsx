@@ -12,7 +12,8 @@ export default defineComponent({
         return {
           top: props?.block.top + 'px',
           left: props?.block.left+ 'px',
-          zIndex: props?.block.zIndex
+          zIndex: props?.block.zIndex,
+          value: props?.block.value,
         }
       },
       set() {}

@@ -8,16 +8,16 @@ const props = defineProps<{
 <template>
   <section class='ButtonTab'>
     <el-tabs class="el-segmented">
-      <el-tab-pane v-for="(tab, index) in tabs" :key="index" :label="tab?.label" >
+      <el-tab-pane v-for="(tab, index) in tabs" :key="index" :label="tab?.label">
         <slot :name="tab?.value" />
       </el-tab-pane>
     </el-tabs>
   </section>
 </template>
 <style scoped lang='scss'>
-
 .ButtonTab {
   position: sticky;
+  height: 100%;
   .el-tabs {
     height: 100%;
     width: 100%;
@@ -25,7 +25,6 @@ const props = defineProps<{
     flex-direction: column;
     overflow: hidden;
     position: inherit;
-    padding: 0 10px;
     .el-tabs__header {
       position: sticky;
     }
@@ -35,101 +34,94 @@ const props = defineProps<{
       flex-direction: column;
       overflow: auto;
       padding: var(--padding-width);
+      scrollbar-width: none;
+      padding: 12px;
     }
     :deep(.el-tabs__item) {
       flex: 1;
     }
   }
-}
-.el-segmented {
-  --el-segmented-radius: var(--el-border-radius-base);
-  --el-segmented-padding: 3px;
-  --el-segmented-bg: var(--el-fill-color-light);
-  --el-segmented-height: 28px;
-  --el-segmented-font-size: 14px;
-  --el-segmented-item-padding: 12px;
-  --el-segmented-color: var(--el-text-color-secondary);
-  --el-segmented-active-color: var(--el-text-color-primary);
-  --el-segmented-active-bg: var(--el-bg-color-overlay);
-  --el-segmented-active-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
-  --el-segmented-hover-bg: rgba(0, 0, 0, 0.04);
-  --el-segmented-disabled-color: var(--el-text-color-placeholder);
-  :deep {
-    &.is-block {
+  .el-segmented {
+    --el-segmented-radius: var(--el-border-radius-base);
+    --el-segmented-padding: 3px;
+    --el-segmented-bg: var(--el-fill-color-light);
+    --el-segmented-height: 28px;
+    --el-segmented-font-size: 14px;
+    --el-segmented-item-padding: 12px;
+    --el-segmented-color: var(--el-text-color-secondary);
+    --el-segmented-active-color: var(--el-text-color-primary);
+    --el-segmented-active-bg: var(--el-bg-color-overlay);
+    --el-segmented-active-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+    --el-segmented-hover-bg: rgba(0, 0, 0, 0.04);
+    --el-segmented-disabled-color: var(--el-text-color-placeholder);
+    background-color: unset;
+    :deep {
+      &.is-block {
+        .el-tabs__header {
+          display: inline-block;
+        }
+      }
       .el-tabs__header {
-        display: inline-block;
-      }
-    }
-
-    .el-tabs__header {
-      margin: 0;
-      box-sizing: border-box;
-      background: var(--el-segmented-bg);
-      border-radius: var(--el-segmented-radius);
-      padding: var(--el-segmented-padding);
-    }
-
-    .el-tabs__nav-scroll,
-    .el-tabs__nav-wrap {
-      margin: 0;
-      overflow: visible;
-    }
-
-    .el-tabs__nav-wrap {
-      &:after {
-        display: none;
-      }
-    }
-
-    .el-tabs__nav {
-      float: none;
-
-      &:not(:has(.is-active)) {
-        .el-tabs__active-bar {
-          padding: 0;
-        }
-      }
-
-      .el-tabs__item {
-        padding: 0 var(--el-segmented-item-padding);
-        color: var(--el-segmented-color);
-        height: var(--el-segmented-height);
-        line-height: var(--el-segmented-height);
-        font-size: var(--el-segmented-font-size);
+        margin: 0;
+        box-sizing: border-box;
+        background: var(--el-segmented-bg);
         border-radius: var(--el-segmented-radius);
-        transition:
-          color 0.2s,
-          background-color 0.2s;
-        background: none;
-        z-index: 2;
-
-        &:not(.is-disabled) {
-          &.is-active {
-            color: var(--el-segmented-active-color) !important;
-            background: none !important;
+        padding: var(--el-segmented-padding);
+      }
+      .el-tabs__nav-scroll,
+      .el-tabs__nav-wrap {
+        margin: 0;
+        overflow: visible;
+      }
+      .el-tabs__nav-wrap {
+        &:after {
+          display: none;
+        }
+      }
+      .el-tabs__nav {
+        float: none;
+        &:not(:has(.is-active)) {
+          .el-tabs__active-bar {
+            padding: 0;
           }
-
-          &:hover {
-            color: var(--el-segmented-active-color);
-            background: var(--el-segmented-hover-bg);
+        }
+        .el-tabs__item {
+          padding: 0 var(--el-segmented-item-padding);
+          color: var(--el-segmented-color);
+          height: var(--el-segmented-height);
+          line-height: var(--el-segmented-height);
+          font-size: var(--el-segmented-font-size);
+          border-radius: var(--el-segmented-radius);
+          transition:
+            color 0.2s,
+            background-color 0.2s;
+          background: none;
+          z-index: 2;
+          &:not(.is-disabled) {
+            &.is-active {
+              color: var(--el-segmented-active-color) !important;
+              background: none !important;
+            }
+            &:hover {
+              color: var(--el-segmented-active-color);
+              background: var(--el-segmented-hover-bg);
+            }
           }
         }
       }
-    }
-
-    .el-tabs__active-bar {
-      padding: 0 var(--el-segmented-item-padding);
-      margin-left: calc(0px - var(--el-segmented-item-padding));
-      background: var(--el-segmented-active-bg);
-      border-radius: var(--el-segmented-radius);
-      box-shadow: var(--el-segmented-active-shadow);
-      transform: translate(var(--el-segmented-item-padding));
-      box-sizing: content-box;
-      height: auto;
-      bottom: 0;
-      top: 0;
+      .el-tabs__active-bar {
+        padding: 0 var(--el-segmented-item-padding);
+        margin-left: calc(0px - var(--el-segmented-item-padding));
+        background: var(--el-segmented-active-bg);
+        border-radius: var(--el-segmented-radius);
+        box-shadow: var(--el-segmented-active-shadow);
+        transform: translate(var(--el-segmented-item-padding));
+        box-sizing: content-box;
+        height: auto;
+        bottom: 0;
+        top: 0;
+      }
     }
   }
 }
-
 </style>

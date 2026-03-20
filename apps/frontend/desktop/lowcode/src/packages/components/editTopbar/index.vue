@@ -9,7 +9,7 @@
         </el-button>
         返回
       </div>
-      <div class="fileName">
+      <!-- <div class="fileName">
         <el-input v-if="editable" v-model="fileName" /> <span v-else>{{ fileName }}</span>
       </div>
       <el-button v-if="!editable" link @click="editable = !editable">
@@ -21,7 +21,7 @@
         <el-icon :size="20">
           <Select />
         </el-icon>
-      </el-button>
+      </el-button> -->
     </div>
     <div class="middle-actions">
       <el-space>

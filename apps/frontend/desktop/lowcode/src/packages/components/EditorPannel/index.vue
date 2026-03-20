@@ -1,13 +1,28 @@
 <template>
   <section class="EditorPannel">
-   <ButtonTab :tabs="tabs" >
-    <template #form>
-      宽度: {{form?.width}}   <el-input-number v-model="form.width" :step="10" />
-px
-            高度: {{form?.height}}px
-        <el-input-number v-model="form.height" :step="10" />
-    </template>
-   </ButtonTab>
+    <ButtonTab :tabs="tabs">
+      <template #form>
+        <el-form :model="form" label-position="left" label-width="80">
+          <el-form-item label="表单名">
+            <el-input v-model="form.formName" style="width: 240px" placeholder="请输入表单名" />
+          </el-form-item>
+          <el-form-item label="表单宽度">
+            <el-input-number v-model="form.width" style="width: 240px" :step="10">
+              <!-- <template #suffix>
+                <span>PX</span>
+              </template> -->
+            </el-input-number>
+          </el-form-item>
+          <el-form-item label="表单高度">
+            <el-input-number v-model="form.height" style="width: 240px" :step="10">
+              <!-- <template #suffix>
+                <span>PX</span>
+              </template> -->
+            </el-input-number>
+          </el-form-item>
+        </el-form>
+      </template>
+    </ButtonTab>
   </section>
 </template>
 <script lang="ts" setup>
@@ -15,11 +30,11 @@ import ButtonTab from '@/components/ButtonTab/index.vue'
 const props = defineProps({
   block: {
     type: Object,
-    default: () => {}
+    default: () => { }
   },
   form: {
     type: Object,
-    default: () => {}
+    default: () => { }
   }
 })
 const tabs = [
@@ -30,7 +45,7 @@ const tabs = [
 console.log("block", props.block)
 </script>
 <style lang="scss" scoped>
-.EditorPannel{
+.EditorPannel {
   width: 300px;
   background-color: #fff;
   border-radius: 4px;
