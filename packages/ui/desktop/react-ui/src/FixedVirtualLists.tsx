@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState } from 'react';
 
-const FixedVirtualLists = (props) => {
+const FixedVirtualLists = (props) => {
   const { height, width, itemSize, itemCount, children: Child } = props;
   // 记录滚动掉的高度
   const [scrollOffset, setScrollOffset] = useState(0);

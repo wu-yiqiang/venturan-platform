@@ -4,19 +4,6 @@ import CommonComponents from '@/packages/components/CommonComponents/index.vue'
 import CustomComponents from '@/packages/components/CustomComponents/index.vue'
 import { ref } from 'vue';
 const value = defineModel()
-// const props = defineProps({
-//   value: {
-//     type: Object
-//   }
-// })
-// const data = computed({
-//   get() {
-//     return props?.value
-//   },
-//   set(value) {
-//     emit('update:value', value)
-//   }
-// })
 enum ComponentTypeEnum {
     Common = 'Common',
     Custom = 'Custom',
@@ -24,7 +11,6 @@ enum ComponentTypeEnum {
     Other = 'Other'
 }
 const type = ref(ComponentTypeEnum.Common)
-// provide('config', registerConfig)
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 {
-  "name": "@venturan-monorepo/sre",
+  "name": "@venturan-platform/sre",
   "private": true,
   "version": "1.0.0",
   "main": "src/index.js",
@@ -10,7 +10,7 @@
   "dependencies": {
     "@venturan-platform/sre": "file:",
     "@venturan-platform/utils": "workspace:^",
-    "@venturan-platform/vue-pc-ui": "workspace:^"
+    "@venturan-platform/vue-ui": "workspace:^"
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.57.0"

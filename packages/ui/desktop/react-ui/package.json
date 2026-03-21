@@ -1,9 +1,8 @@
 {
-  "name": "@venturan-monorepo/react-pc-ui",
+  "name": "@venturan-platform/react-ui",
   "private": true,
   "version": "1.0.0",
   "main": "src/index.ts",
   "dependencies": {
-    "@venturan-monorepo/react-pc-ui": "files:"
   }
 }

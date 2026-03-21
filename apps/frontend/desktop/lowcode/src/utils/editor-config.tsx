@@ -32,7 +32,7 @@ registerConfig.register({
   preview: () => '预览文本',
   render: () => '渲染文本',
   key: ComponentTypeEnum.TEXT,
-  props: {
+  attributes: {
     text: '文本'
   }
 })
@@ -48,7 +48,7 @@ registerConfig.register({
   preview: () => <ElButton>预览按钮</ElButton>,
   render: () => <ElButton>渲染按钮</ElButton>,
   key: ComponentTypeEnum.BUTTON,
-  props: {
+  attributes: {
     text: '按钮'
   }
 })
@@ -62,10 +62,14 @@ registerConfig.register({
     </el-icon>
   ),
   preview: () => <ElInput placeholder="预览输入框" />,
-  render: (props: any) => <ElInput {...props} placeholder="渲染输入框" />,
+  render: (props: any) => <ElInput {...props} style={{ width: props?.width + 'px', height: props?.height + 'px' }} v-model={props.value} />,
   key: ComponentTypeEnum.INPUT,
-  props: {
-    text: '输入框'
+  attributes: {
+    text: '输入框',
+    value: '',
+    placeholder: '请输入',
+    width: 240,
+    height: 32
   }
 })
 
@@ -78,21 +82,42 @@ registerConfig.register({
     </el-icon>
   ),
   preview: () => <ElSelect placeholder="预览选择器" style="width: 240px" />,
-  render: () => (
+  render: (props: any) => (
     <ElSelect
-      placeholder="渲染选择器"
-      style="width: 240px"
+      {...props}
+      v-model={props.value}
+      style={{ width: props?.width + 'px', height: props?.height + 'px' }}
       options={[
-        { id: 1, label: 'Option A', desc: 'Option A - 230506' },
-        { id: 2, label: 'Option B', desc: 'Option B - 230506' },
-        { id: 3, label: 'Option C', desc: 'Option C - 230506' },
-        { id: 4, label: 'Option A', desc: 'Option A - 230507' }
+        {
+          value: 'Option1',
+          label: 'Option1'
+        },
+        {
+          value: 'Option2',
+          label: 'Option2'
+        },
+        {
+          value: 'Option3',
+          label: 'Option3'
+        },
+        {
+          value: 'Option4',
+          label: 'Option4'
+        },
+        {
+          value: 'Option5',
+          label: 'Option5'
+        }
       ]}
     ></ElSelect>
   ),
   key: ComponentTypeEnum.SELECT,
-  props: {
-    text: '选择器'
+  attributes: {
+    text: '选择器',
+    value: 'Option1',
+    placeholder: '请选择',
+    width: 240,
+    height: 32
   }
 })
 
@@ -108,8 +133,7 @@ export const basicComponents = [
     preview: () => '预览文本',
     render: () => '渲染文本',
     key: ComponentTypeEnum.TEXT,
-    props: {
-    }
+    attributes: {}
   },
   {
     label: '按钮',
@@ -121,8 +145,7 @@ export const basicComponents = [
     preview: () => <ElButton>预览按钮</ElButton>,
     render: () => <ElButton>渲染按钮</ElButton>,
     key: ComponentTypeEnum.BUTTON,
-    props: {
-    }
+    attributes: {}
   },
   {
     label: '输入框',
@@ -132,9 +155,10 @@ export const basicComponents = [
       </el-icon>
     ),
     preview: () => <ElInput placeholder="预览输入框" />,
-    render: (value: string) => <ElInput placeholder="渲染输入框" />,
+    render: (props: any) => <ElInput {...props} style={{ width: props?.width + 'px', height: props?.height + 'px' }} v-model={props.value} />,
     key: ComponentTypeEnum.INPUT,
-    props: {
+    attributes: {
+      value: '11'
     }
   },
   {
@@ -147,7 +171,6 @@ export const basicComponents = [
     preview: () => <ElSelect placeholder="预览选择器" />,
     render: () => <ElSelect placeholder="渲染选择器" />,
     key: ComponentTypeEnum.SELECT,
-    props: {
-    }
+    attributes: {}
   }
 ]

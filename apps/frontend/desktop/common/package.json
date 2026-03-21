@@ -11,7 +11,7 @@
     "@micro-zoe/micro-app": "1.0.0-rc.26",
     "@venturan-platform/common": "file:",
     "@venturan-platform/utils": "workspace:^",
-    "@venturan-platform/vue-pc-ui": "workspace:^"
+    "@venturan-platform/vue-ui": "workspace:^"
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.57.0",

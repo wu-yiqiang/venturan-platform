@@ -7,18 +7,23 @@
             <el-input v-model="form.formName" style="width: 240px" placeholder="请输入表单名" />
           </el-form-item>
           <el-form-item label="表单宽度">
-            <el-input-number v-model="form.width" style="width: 240px" :step="10">
-              <!-- <template #suffix>
-                <span>PX</span>
-              </template> -->
-            </el-input-number>
+            <el-input-number v-model="form.width" style="width: 240px" :step="10" />
           </el-form-item>
           <el-form-item label="表单高度">
-            <el-input-number v-model="form.height" style="width: 240px" :step="10">
-              <!-- <template #suffix>
-                <span>PX</span>
-              </template> -->
-            </el-input-number>
+            <el-input-number v-model="form.height" style="width: 240px" :step="10" />
+          </el-form-item>
+        </el-form>
+      </template>
+      <template v-if="block" #common>
+        <el-form :model="block" label-position="left" label-width="80">
+          <el-form-item label="占位符">
+            <el-input v-model="block.attributes.placeholder" style="width: 240px" placeholder="请输入占位符" />
+          </el-form-item>
+          <el-form-item label="组件宽度">
+            <el-input-number v-model="block.attributes.width" style="width: 240px" :step="10" />
+          </el-form-item>
+          <el-form-item label="组件高度">
+            <el-input-number v-model="block.attributes.height" style="width: 240px" :step="10" />
           </el-form-item>
         </el-form>
       </template>
@@ -42,7 +47,9 @@ const tabs = [
   { label: '通用属性', value: 'common' },
   { label: '私有属性', value: 'private' }
 ]
-console.log("block", props.block)
+watchEffect(() => {
+  console.log("block", props.block)
+})
 </script>
 <style lang="scss" scoped>
 .EditorPannel {

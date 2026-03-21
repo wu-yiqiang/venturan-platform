@@ -48,9 +48,9 @@ importers:
       '@venturan-platform/utils':
         specifier: workspace:^
         version: link:../../../../packages/utils
-      '@venturan-platform/vue-pc-ui':
+      '@venturan-platform/vue-ui':
         specifier: workspace:^
-        version: link:../../../../packages/ui/desktop/vue-pc-ui
+        version: link:../../../../packages/ui/desktop/vue-ui
     devDependencies:
       '@arco-design/web-vue':
         specifier: ^2.57.0
@@ -388,13 +388,13 @@ importers:
     dependencies:
       '@venturan-platform/sre':
         specifier: 'file:'
-        version: '@venturan-monorepo/sre@file:apps/frontend/desktop/sre'
+        version: file:apps/frontend/desktop/sre
       '@venturan-platform/utils':
         specifier: workspace:^
         version: link:../../../../packages/utils
-      '@venturan-platform/vue-pc-ui':
+      '@venturan-platform/vue-ui':
         specifier: workspace:^
-        version: link:../../../../packages/ui/desktop/vue-pc-ui
+        version: link:../../../../packages/ui/desktop/vue-ui
     devDependencies:
       '@arco-design/web-vue':
         specifier: ^2.57.0
@@ -529,11 +529,13 @@ importers:
 
   packages/common:
     dependencies:
-      '@venturan-monorepo/common':
+      '@venturan-platform/common':
         specifier: 'file:'
         version: 'link:'
 
-  packages/ui/desktop/vue-pc-ui: {}
+  packages/ui/desktop/react-ui: {}
+
+  packages/ui/desktop/vue-ui: {}
 
   packages/utils:
     dependencies:
@@ -3186,9 +3188,6 @@ packages:
     peerDependencies:
       vue: ^3.0.0
 
-  '@venturan-monorepo/sre@file:apps/frontend/desktop/sre':
-    resolution: {directory: apps/frontend/desktop/sre, type: directory}
-
   '@venturan-platform/common@file:apps/frontend/desktop/common':
     resolution: {directory: apps/frontend/desktop/common, type: directory}
 
@@ -3197,6 +3196,9 @@ packages:
 
   '@venturan-platform/root@file:':
     resolution: {directory: '', type: directory}
+
+  '@venturan-platform/sre@file:apps/frontend/desktop/sre':
+    resolution: {directory: apps/frontend/desktop/sre, type: directory}
 
   '@venturan/vite-plugin-build-compress@1.0.0':
     resolution: {integrity: sha512-DdO22Nky4F/IdPmt0bbI615lKwAhYYMvgxMmRBXNd+Vp35UOqnDW1usfeRntG+5m+s5x8r3jrB5yKAB9VWzcPw==}
@@ -11513,16 +11515,11 @@ snapshots:
     dependencies:
       vue: 3.5.30(typescript@5.6.3)
 
-  '@venturan-monorepo/sre@file:apps/frontend/desktop/sre':
-    dependencies:
-      '@venturan-platform/utils': link:packages/utils
-      '@venturan-platform/vue-pc-ui': link:packages/ui/desktop/vue-pc-ui
-
   '@venturan-platform/common@file:apps/frontend/desktop/common':
     dependencies:
       '@micro-zoe/micro-app': 1.0.0-rc.26
       '@venturan-platform/utils': link:packages/utils
-      '@venturan-platform/vue-pc-ui': link:packages/ui/desktop/vue-pc-ui
+      '@venturan-platform/vue-ui': link:packages/ui/desktop/vue-ui
 
   '@venturan-platform/mes@file:apps/frontend/desktop/mes(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -11543,6 +11540,11 @@ snapshots:
     transitivePeerDependencies:
       - debug
       - typescript
+
+  '@venturan-platform/sre@file:apps/frontend/desktop/sre':
+    dependencies:
+      '@venturan-platform/utils': link:packages/utils
+      '@venturan-platform/vue-ui': link:packages/ui/desktop/vue-ui
 
   '@venturan/vite-plugin-build-compress@1.0.0(@swc/core@1.13.5)(jiti@2.6.1)(less@4.6.4)(lightningcss@1.32.0)(postcss@8.5.8)(sass@1.98.0)(terser@5.46.1)(yaml@2.8.2)':
     dependencies:
