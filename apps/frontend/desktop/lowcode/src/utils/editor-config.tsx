@@ -36,10 +36,11 @@ export const basicComponents = [
         <Tickets />
       </el-icon>
     ),
-    render: (props: any) => <ElInput {...props} style={{ width: props?.width + 'px', height: props?.height + 'px' }} v-model={props.value} />,
+    render: (props: any) => <ElInput {...props} style={{ width: props?.width + 'px', height: props?.height + 'px' }} v-model={props.value} disabled={props?.disabled} />,
     key: ComponentTypeEnum.INPUT,
     attributes: {
       text: '输入框',
+      disabled: false,
       value: '',
       placeholder: '请输入',
       width: 200,
@@ -59,6 +60,7 @@ export const basicComponents = [
         {...props}
         style={{ width: props?.width + 'px', height: props?.height + 'px' }}
         v-model={props.value}
+        disabled={props?.disabled}
         options={[
           {
             value: 'Option1',
@@ -86,6 +88,7 @@ export const basicComponents = [
     key: ComponentTypeEnum.SELECT,
     attributes: {
       text: '选择器',
+      disabled: false,
       value: '',
       placeholder: '请选择',
       width: 200,

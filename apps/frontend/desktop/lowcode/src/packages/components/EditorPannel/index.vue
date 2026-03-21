@@ -16,8 +16,11 @@
       </template>
       <template v-if="block" #common>
         <el-form :model="block" label-position="left" label-width="80">
-          <el-form-item label="默认值">
+          <el-form-item label="组件值">
             <el-input v-model="block.attributes.value" />
+          </el-form-item>
+           <el-form-item label="禁用">
+            <el-switch v-model="block.attributes.disabled" />
           </el-form-item>
           <el-form-item label="占位符">
             <el-input v-model="block.attributes.placeholder" style="width: 240px" placeholder="请输入占位符" />
