@@ -188,7 +188,6 @@ const handleImport = () => {
             content: '';
             position: absolute;
             inset: 0;
-            background-color: #ccc;
             opacity: 0.2;
           }
         }
