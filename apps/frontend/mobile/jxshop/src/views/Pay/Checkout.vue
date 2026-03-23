@@ -87,7 +87,7 @@ const onConfirm = async ({ selectedValues }) => {
 const handlePaySubmit = async (req: any) => {
   const reqParams = req?.map((item) => {
     const it = {
-      commidityId: item?.id,
+      commodityId: item?.id,
       count: item?.count,
     }
     return it

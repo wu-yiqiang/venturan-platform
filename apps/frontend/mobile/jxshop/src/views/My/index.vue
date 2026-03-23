@@ -23,7 +23,7 @@
     </div>
 
     <!-- 2. 订单中心入口 -->
-    <van-card title="我的订单" class="section-card" :border="false">
+    <!-- <van-card title="我的订单" class="section-card" :border="false">
       <template #default>
         <div class="order-list">
           <div class="order-item" v-for="order in orderTypes" :key="order.type" @click="navigateToOrder(order.type)">
@@ -40,7 +40,7 @@
           全部订单 <van-icon name="arrow" />
         </div>
       </template>
-    </van-card>
+    </van-card> -->
 
     <!-- 3. 常用工具列表 -->
     <van-cell-group inset class="section-card">
@@ -133,7 +133,8 @@ const orderTypes = reactive<OrderType[]>([
 ]);
 
 const toolList = reactive<ToolItem[]>([
-  { name: '收货地址', icon: 'location-o', color: '#ee0a24', path: '/address' },
+  { name: '我的订单', icon: 'setting-o', color: '#969799', path: '/orders'},
+  // { name: '收货地址', icon: 'location-o', color: '#ee0a24', path: '/address' },
   // { name: '设置', icon: 'setting-o', color: '#969799', path: '/settings', badge: 1 },
 ]);
 

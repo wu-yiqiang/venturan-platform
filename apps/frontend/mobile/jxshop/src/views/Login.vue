@@ -80,7 +80,7 @@ const isLoading = ref(false);
 const isPhoneValid = ref(false);
 
 const form = reactive<LoginForm>({
-  phone: '16670860823',
+  phone: '15456780923',
   code: '1234@Abcd',
   agree: false
 });

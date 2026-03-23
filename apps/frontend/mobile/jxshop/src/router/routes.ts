@@ -24,14 +24,14 @@ const routes: Array<RouteRecordRaw> = [
           title: '购买'
         }
       },
-      // {
-      //   path: 'pay',
-      //   name: 'Pay',
-      //   component: () => import('@/views/Pay/index.vue'),
-      //   meta: {
-      //     title: '支付'
-      //   }
-      // },
+      {
+        path: 'orders',
+        name: 'Orders',
+        component: () => import('@/views/Orders/index.vue'),
+        meta: {
+          title: '订单'
+        }
+      },
       {
         path: 'my',
         name: 'My',
