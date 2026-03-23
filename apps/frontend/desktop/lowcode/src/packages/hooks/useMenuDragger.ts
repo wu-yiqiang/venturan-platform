@@ -20,7 +20,6 @@ export const useMenuDragger = (containerRef: Ref, data: Ref) => {
   }
   const drop = (e: { offsetY: any; offsetX: any }) => {
     let blocks = data?.value.blocks
-    console.log('当前', currentComponent.value.attributes)
     data.value = {
       ...data?.value,
       blocks: [
@@ -32,7 +31,7 @@ export const useMenuDragger = (containerRef: Ref, data: Ref) => {
           alignCenter: true,
           key: currentComponent.value?.key,
           id: Date.now(),
-          attributes: currentComponent.value.attributes
+          attributes: cloneDeep(currentComponent.value.attributes)
         }
       ]
     }

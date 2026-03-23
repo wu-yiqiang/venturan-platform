@@ -1,12 +1,11 @@
 <template>
   <el-dialog v-model="open" title="导入" fullscreen class="fullscreen" :before-close="handleClose">
-    <vue-json-pretty v-model:data="jsonDatas"
- :deep="3" :show-length="true" :show-line="true" :editable="true"
+    <vue-json-pretty v-if="jsonDatas" v-model:data="jsonDatas" :deep="3" :show-length="true" :show-line="true" :editable="true"
       :highlight-mouseover="true" />
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="handleClose">Cancel</el-button>
-                <el-button @click="handlePaste">
+        <el-button @click="handlePaste">
           Paste
         </el-button>
         <el-button type="primary" @click="handleSave">
@@ -36,7 +35,7 @@ const open = computed({
     emit('update:visible', val)
   }
 })
-const jsonDatas = ref({})
+const jsonDatas = ref(null)
 const handleClose = () => {
   open.value = false
 }
@@ -47,21 +46,20 @@ const handleOk = (data: any) => {
 
 const handlePaste = async () => {
   const data = await navigator.clipboard?.readText()
-  console.log("sss", navigator.clipboard?.readText())
   if (data?.length) {
     jsonDatas.value = JSON.parse(data)
     message({
-    message: '粘贴成功',
-    type: 'success'
-  });
+      message: '粘贴成功',
+      type: 'success'
+    });
   } else {
     jsonDatas.value = {}
-      message({
-    message: '粘贴失败',
-    type: 'error'
-  });
-}
-   
+    message({
+      message: '粘贴失败',
+      type: 'error'
+    });
+  }
+
 }
 const handleSave = () => {
   message({
@@ -80,15 +78,10 @@ const handleSave = () => {
   .el-dialog__body {
     flex: 1;
     overflow-y: auto;
+
     .inputJson {
       border: none;
     }
-    // .vjs-tree {
-    //   height: 100%;
-    //   .vjs-tree-list {
-    //     height: 100%;
-    //   }
-    // }
   }
 }
 </style>

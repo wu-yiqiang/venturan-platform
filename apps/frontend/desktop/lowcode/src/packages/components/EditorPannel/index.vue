@@ -16,19 +16,22 @@
       </template>
       <template v-if="block" #common>
         <el-form :model="block" label-position="left" label-width="80">
-          <el-form-item label="组件值">
+          <el-form-item v-if="!([ComponentTypeEnum.BUTTON, ComponentTypeEnum.TEXT].includes(block.key))" label="组件值">
             <el-input v-model="block.attributes.value" />
           </el-form-item>
-           <el-form-item label="禁用">
+          <el-form-item v-if="([ComponentTypeEnum.BUTTON, ComponentTypeEnum.TEXT].includes(block.key))" label="标签">
+            <el-input v-model="block.attributes.label" />
+          </el-form-item>
+           <el-form-item v-if="!([ComponentTypeEnum.BUTTON, ComponentTypeEnum.TEXT].includes(block.key))" label="禁用">
             <el-switch v-model="block.attributes.disabled" />
           </el-form-item>
-          <el-form-item label="占位符">
+          <el-form-item v-if="block.attributes?.placeholder?.length" label="占位符">
             <el-input v-model="block.attributes.placeholder" style="width: 240px" placeholder="请输入占位符" />
           </el-form-item>
-          <el-form-item label="组件宽度">
+          <el-form-item v-if="block.attributes?.width" label="组件宽度">
             <el-input-number v-model="block.attributes.width" style="width: 240px" :step="10" />
           </el-form-item>
-          <el-form-item label="组件高度">
+          <el-form-item v-if="block.attributes?.height" label="组件高度">
             <el-input-number v-model="block.attributes.height" style="width: 240px" :step="10" />
           </el-form-item>
         </el-form>
@@ -38,6 +41,7 @@
 </template>
 <script lang="ts" setup>
 import ButtonTab from '@/components/ButtonTab/index.vue'
+import { ComponentTypeEnum } from '../../../common/const'
 const props = defineProps({
   block: {
     type: Object,

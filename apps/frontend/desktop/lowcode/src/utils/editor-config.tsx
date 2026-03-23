@@ -10,9 +10,16 @@ export const basicComponents = [
         <Tickets />
       </el-icon>
     ),
-    render: () => '渲染文本',
+    render: (props: any) => <span style={{ width: props?.width + 'px', height: props?.height + 'px' }}>{props?.label}</span>,
     key: ComponentTypeEnum.TEXT,
-    attributes: {}
+    attributes: {
+      label: '文本',
+      width: 60,
+      height: 32
+    },
+    privateProperties: {
+
+    }
   },
   {
     label: '按钮',
@@ -21,12 +28,13 @@ export const basicComponents = [
         <Tickets />
       </el-icon>
     ),
-    render: () => <ElButton>渲染按钮</ElButton>,
+    render: (props: any) => <ElButton>{props?.label}</ElButton>,
     key: ComponentTypeEnum.BUTTON,
     attributes: {
-      placeholder: '渲染按钮',
-      width: 60,
-      height: 32
+      label: '按钮',
+    },
+    privateProperties: {
+
     }
   },
   {
