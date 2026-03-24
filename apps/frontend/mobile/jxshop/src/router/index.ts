@@ -13,7 +13,7 @@ const router = createRouter({
 router.beforeEach((to, _from, next) => {
   const sysStore = useSysStore()
   const userInfos = sysStore.userInfos as any
-  sysStore.setBottomTab(to?.meta?.bottomTab)
+  sysStore.setBottomTab(to?.meta?.bottomTab as boolean)
   if (to.path === '/login') {
     next()
   } else if (!userInfos?.token) {
