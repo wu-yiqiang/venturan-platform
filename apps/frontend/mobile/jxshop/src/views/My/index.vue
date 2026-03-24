@@ -133,7 +133,7 @@ const orderTypes = reactive<OrderType[]>([
 ]);
 
 const toolList = reactive<ToolItem[]>([
-  { name: '我的订单', icon: 'setting-o', color: '#969799', path: '/orders'},
+  { name: '我的订单', icon: 'bag-o', color: '#969799', path: '/orders'},
   // { name: '收货地址', icon: 'location-o', color: '#ee0a24', path: '/address' },
   // { name: '设置', icon: 'setting-o', color: '#969799', path: '/settings', badge: 1 },
 ]);

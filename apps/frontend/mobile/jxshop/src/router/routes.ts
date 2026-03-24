@@ -13,7 +13,8 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Home',
         component: () => import('@/views/Home/index.vue'),
         meta: {
-          title: '主页'
+          title: '主页',
+          bottomTab: true
         }
       },
       {
@@ -21,7 +22,8 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Shop',
         component: () => import('@/views/Shop/index.vue'),
         meta: {
-          title: '购买'
+          title: '购买',
+          bottomTab: false
         }
       },
       {
@@ -29,7 +31,17 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Orders',
         component: () => import('@/views/Orders/index.vue'),
         meta: {
-          title: '订单'
+          title: '订单',
+          bottomTab: false
+        }
+      },
+      {
+        path: 'orders-details',
+        name: 'OrderDetails',
+        component: () => import('@/views/Orders/details.vue'),
+        meta: {
+          title: '订单详情',
+          bottomTab: false
         }
       },
       {
@@ -38,7 +50,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/My/index.vue'),
         meta: {
           title: '我的',
-          noCache: true
+          noCache: true,
+          bottomTab: true
         }
       }
     ]

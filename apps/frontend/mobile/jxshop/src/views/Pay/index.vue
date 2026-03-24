@@ -8,7 +8,7 @@
                 </header>
             </div>
             <div class="commdoties-container">
-                <Checkout v-if="selectedLists?.length" :checkedlist="selectedLists"/>
+                <Checkout v-if="selectedLists?.length" :checkedlist="selectedLists" @success="open = false"/>
             </div>
         </section>
     </van-popup>

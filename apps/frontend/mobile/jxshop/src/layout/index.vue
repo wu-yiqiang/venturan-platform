@@ -2,6 +2,8 @@
 import tabbar from '@/components/tabbar/index.vue'
 import { useDarkModeStore } from '@/store/modules/dark-mode'
 const darkModeStore = useDarkModeStore()
+import { useSysStore } from '@/store/modules/sysStore';
+const sysStore = useSysStore()
 const { theme } = storeToRefs(darkModeStore)
 </script>
 
@@ -9,12 +11,9 @@ const { theme } = storeToRefs(darkModeStore)
   <div class="app-wrapper">
     <van-config-provider>
       <router-view v-slot="{ Component }">
-        <!-- <keep-alive>
-          <component :is="Component" />
-        </keep-alive> -->
         <component :is="Component" />
       </router-view>
-      <tabbar />
+      <tabbar v-if="sysStore?.bottomTab" />
     </van-config-provider>
   </div>
 </template>

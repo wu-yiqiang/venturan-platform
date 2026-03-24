@@ -38,6 +38,8 @@ import { cloneDeep } from 'lodash-es'
 import CartItem from './CartItem.vue';
 import { formattedAmountCent, formattedAmountCNY } from '@/utils';
 import { payPay } from '@/api/pay';
+import { showSuccessToast } from 'vant';
+const emit = defineEmits(['success'])
 const props = defineProps({
   checkedlist: {
     type: Array<Object>,
@@ -68,7 +70,8 @@ const selectedMap = ref<Record<number, boolean>>(
   }, {} as Record<number, boolean>)
 );
 const handleClosePayType = () => {
-    open.value = false
+  open.value = false
+  emit('success')
 }
 const onConfirm = async ({ selectedValues }) => {
   const payType = selectedValues[0]
@@ -82,6 +85,7 @@ const onConfirm = async ({ selectedValues }) => {
 
   }
   await handlePaySubmit(submitDatas)
+  showSuccessToast("支付成功")
   handleClosePayType()
 };
 const handlePaySubmit = async (req: any) => {
@@ -92,7 +96,6 @@ const handlePaySubmit = async (req: any) => {
     }
     return it
   })
-  console.log("sdsd", reqParams)
   await payPay(reqParams)
 }
 const selectedCount = computed(() =>

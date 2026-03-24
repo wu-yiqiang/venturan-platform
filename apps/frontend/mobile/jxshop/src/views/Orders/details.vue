@@ -1,27 +1,12 @@
 <template>
-    <div class="Orders">
+    <div class="OrdersDetails">
         <div class="topbar">
-            <van-icon name="arrow-left" @click="handleback" />
-            <div class="title"><van-nav-bar title="我的订单" /></div>
+            <van-icon name="arrow-left" @click="handleback"/>
+            <div class="title"><van-nav-bar title="订单详情" /></div>
             <van-nav-bar />
         </div>
         <div class="info-orders">
-            <van-list v-model:loading="loading" :finished="finished" @load="onLoad">
-                <div class="cards">
-                    <div v-for="store in storeList" :key="store.id" class="store-card"
-                        @click="goToStoreDetail(store?.id)">
-                        <div class="title">订单号： {{ store?.serialNumber }}</div>
-                        <div class="images">
-                            <div v-for="(item, index) in store.OrderItems" class="image">
-                                <van-image :key="index" :src="avatar(item.Commodity.fileName)" width="100%"
-                                    fit="cover" />
-                                <div class="count">×{{ item?.Quantity }}</div>
-                            </div>
-                        </div>
-                        <div class="sum">总金额：¥ {{ formattedAmountCNY(store?.amount) }}</div>
-                    </div>
-                </div>
-            </van-list>
+                                    <div class="sum">总金额：¥ {{ formattedAmountCNY(formStates?.amount) }}</div>
         </div>
     </div>
 </template>
@@ -33,14 +18,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const loading = ref(false);
-const finished = ref(false);
-const storeList = ref<any[]>([]);
-const onLoad = async () => {
-    const data = await getOrders()
-    storeList.value = data ?? []
-    loading.value = false;
-    finished.value = true;
-};
+const formStates = ref({});
 const avatar = (fileName: string) => {
     if (!fileName) return ''
     return import.meta.env.VITE_STORAGE_BASE_URL + fileName
@@ -48,17 +26,10 @@ const avatar = (fileName: string) => {
 const handleback = () => {
     router.back()
 }
-const goToStoreDetail = (orderId: any) => {
-    // router.push({
-    //     name: 'OrderDetails', query: {
-    //         orderId: orderId
-    //     }
-    // });
-};
 </script>
 
 <style lang="scss" scoped>
-.Orders {
+.OrdersDetails {
     height: 100dvh;
     display: flex;
     flex-direction: column;
@@ -71,7 +42,6 @@ const goToStoreDetail = (orderId: any) => {
         justify-content: space-between;
         align-items: center;
         padding: 0px 12px;
-
         .title {
             flex: 1;
         }
@@ -114,21 +84,7 @@ const goToStoreDetail = (orderId: any) => {
                         min-width: 100px;
                         width: 100px;
                         display: grid;
-                        position: relative;
-                        border-radius: 2px;
-
-                        .count {
-                            position: absolute;
-                            top: 0px;
-                            left: 0px;
-                            padding: 2px;
-                            border-radius: 0 2px 2px 0;
-                            background-color: rgba(204, 204, 204, 0.5);
-                            display: grid;
-                            place-content: center;
-                            font-size: 12px;
-                            color: #fff;
-                        }
+                        place-items: center;
                     }
                 }
 
