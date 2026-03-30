@@ -49,6 +49,7 @@ const handlePaySubmit = async (req: any) => {
     await payPay(reqParams)
 }
 const handleClosePayType = () => {
+    open.value = false
     emit('close')
 }
 </script>

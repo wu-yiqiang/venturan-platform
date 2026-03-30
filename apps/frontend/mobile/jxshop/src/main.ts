@@ -11,6 +11,10 @@ import './styles/index.less'
 import './styles/tailwind.css'
 // svg icon
 import 'virtual:svg-icons-register'
+import VConsole from 'vconsole'
+if (import.meta.env.MODE == 'start') {
+    new VConsole()
+}
 initializeDarkMode()
 function preventZoom() {
     let lastTouchEnd = 0;

@@ -140,6 +140,7 @@ const handleLogin = async () => {
     sysStore.setShopStatus(data)
     router.push('/home');
   } catch (error) {
+    // showFailToast(error)
     showFailToast('登陆失败请联系商城管理员')
   } finally {
     isLoading.value = false;

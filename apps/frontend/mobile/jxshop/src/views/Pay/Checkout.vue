@@ -71,22 +71,18 @@ const handleClosePayType = () => {
   emit('success')
   router.push({ path: '/orders' });
 }
-const copyToClip = (content: string) => {
-  var aux = document.createElement('input')
-  aux.setAttribute('value', content)
-  document.body.appendChild(aux)
-  aux.select()
-  document.execCommand('copy')
-  document.body.removeChild(aux)
+const copyToClip = async (content: string) => {
+  await navigator?.clipboard?.writeText(content);
+  showSuccessToast("已生成代付链接，可分享给好友进行代付")
 }
 const handleCreateHelpPay = async () => {
   const data = await handlePaySubmit(cartItems.value)
   if (data?.length) {
     const baseUrl = `${location.protocol}//${location.host}/jxshop/orders-details?serialNumber=${data}`;
-    copyToClip(baseUrl)
-    showSuccessToast("已生成代付链接，可分享给好友进行代付")
+    await copyToClip(baseUrl)
   }
 }
+
 const handlePaySubmit = async (req: any) => {
     const reqParams = req?.map((item) => {
         const it = {

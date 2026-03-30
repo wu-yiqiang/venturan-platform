@@ -47,11 +47,11 @@ export default defineConfig(({ mode }) => {
       port: 8888,
       hmr: true,
       proxy: {
-        '/prod-api': {
+        '/api': {
           target: `http://192.168.1.222:9527/`,
           changeOrigin: true,
           ws: false,
-          rewrite: (path) => path.replace(/^\/prod-api/, '')
+          rewrite: (path) => path.replace(/^\/api/, '')
         }
       }
     },

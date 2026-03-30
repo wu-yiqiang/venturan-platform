@@ -6,9 +6,9 @@
         <div class="user-info">
             <div class="info-container">
                 <div class="image">
-                    <van-image round width="80px" height="80px" :src="avatarUrl(sysStore.userInfos?.avatar)" />
+                    <van-image round width="16vw" height="16vw" :src="avatarUrl(formStates?.order?.User?.avatar)" />
                 </div>
-                <div class="top-container">{{ userInfo?.name }}</div>
+                <div class="top-container">{{ formStates?.order?.User?.nick_name }}</div>
                 <div class="bottom-container">
                     <div v-if="isUnPay" class="unpay">
                         <div class="payCount">需付款：￥<span class="count">{{ formattedAmountCNY(formStates?.order?.amount) }}</span></div>
@@ -33,11 +33,17 @@
                             <div class="tips">如发生退款，则原路返回</div>
                         </div>
                     </div>
+                    <div v-if="isPayTimeout" class="paysuccess">
+                        <div class="contents">
+                            <div class="title">已过期</div>
+                            <div class="tips">代付链接已过期,请重新生成订单</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="orders">
-                <div v-for="(order, index) in formStates?.orderItems" :key="index" class="order">
-                    <div class="title">{{ order?.Commodity?.shopId }}</div>
+                <div v-for="(order, index) in formStates?.order?.OrderItems" :key="index" class="order">
+                    <div class="title">{{ order?.Commodity?.Shop?.name }}</div>
                     <div class="content-container">
                         <div class="image">
                             <van-image width="50px" height="50px" :src="avatarUrl(order?.Commodity?.fileName)" />
@@ -46,7 +52,7 @@
                             <div class="name">{{ order?.Commodity?.name }}</div>
                             <div class="count">× {{ order?.Quantity }}</div>
                         </div>
-                        <div class="price">￥{{ order?.Commodity?.price }}</div>
+                        <div class="price">￥{{ formattedAmountCNY(order?.total_price) }}</div>
                     </div>
                 </div>
             </div>
@@ -67,11 +73,9 @@
 <script setup lang="ts">
 import { getPrepaidPaymentDetails } from "@/api/pay";
 import PayDialog from '@/components/PayDialog.vue';
-import { PasswordInput, NumberKeyboard, CountDown  } from 'vant';
-import { avatarUrl, formattedAmountCent, formattedAmountCNY } from '@/utils/index'
-import { useRouter } from 'vue-router';
+import { PasswordInput  } from 'vant';
+import { avatarUrl, formattedAmountCNY } from '@/utils/index'
 import { useSysStore } from '@/store/modules/sysStore'
-import { cloneDeep } from 'lodash-es'
 const sysStore = useSysStore()
 const route = useRoute()
 const showKeyboard = ref(true)
@@ -80,23 +84,21 @@ const submitDatas = computed(() => {
     return orders.value ?? []
 })
 const open = ref(false)
-const userInfo = ref({
-    name: '888'
-})
 const minutes = ref('00')
 const seconds = ref('00')
 const orders = ref([])
 const isUnPay = computed(() => {
-    return true
-    return formStates.value.status == 1
+    return formStates.value?.order?.status === 0
+})
+const isPayTimeout = computed(() => {
+    return formStates.value?.order?.status === 1
 })
 const onChange = (data: any) => {
     minutes.value = String(data?.minutes)?.padStart(2, '0')
     seconds.value = String(data?.seconds)?.padStart(2,'0')
 }
 const isSuccessPay = computed(() => {
-    return true
-    return formStates.value.status == 2
+    return formStates.value?.order?.status === 2
 })
 const formStates = ref({
     amount: 95,
@@ -175,12 +177,13 @@ $--image-width: 40px;
                 margin-bottom: 30px;
                 position: absolute;
                 top: -30px;
-                right: calc(50% - $--image-width);
+                left: 50%;
+                transform: translateX(-50%);
             }
 
             .top-container {
                 background-color: rgb(242, 211, 113);
-                padding-top: $--image-width + 16px;
+                padding-top: 10vw;
                 padding-bottom: 10px;
                 border-radius: 4px 4px 0 0;
                 display: grid;
@@ -300,7 +303,7 @@ $--image-width: 40px;
 
         .tips {
             margin-top: 10px;
-
+            width: 100%;
             .title {
                 font-weight: 600;
                 font-size: 16px;

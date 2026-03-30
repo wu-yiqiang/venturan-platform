@@ -18,7 +18,10 @@
                                 <div class="count">×{{ item?.Quantity }}</div>
                             </div>
                         </div>
-                        <div class="sum">支付金额：¥ {{ formattedAmountCNY(store?.amount) }}</div>
+                        <div class="result">
+                            <span>{{ OrderStatus[store?.status] }}</span>
+                            <div class="sum">支付金额：¥ {{ formattedAmountCNY(store?.amount) }}</div>
+                        </div>
                     </div>
                 </div>
             </van-list>
@@ -35,6 +38,11 @@ const router = useRouter();
 const loading = ref(false);
 const finished = ref(false);
 const storeList = ref<any[]>([]);
+const OrderStatus  = {
+    0: '未支付',
+    1: '支付超时',
+    2: '已支付'
+}
 const onLoad = async () => {
     const data = await getOrders()
     storeList.value = data ?? []
@@ -132,13 +140,20 @@ const goToStoreDetail = (orderId: any) => {
                     }
                 }
 
-                .sum {
+                .result {
                     display: flex;
-                    justify-content: end;
-                    font-size: 14px;
-                    color: red;
-                    margin-top: 10px;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .sum {
+                        display: flex;
+                        justify-content: end;
+                        font-size: 14px;
+                        color: red;
+                        margin-top: 10px;
+                    }
                 }
+
             }
         }
 
