@@ -30,7 +30,7 @@ Docker部署服务
     (无SSl版本)
     docker run -d   --name ngin   -p 8080:8080   -v /venturan/software/nginx/nginx.conf:/etc/nginx/nginx.conf:ro   -v /venturan/web:/venturan/web:ro  nginx
     (有SSl版本)
-    docker run -d   --name ngin   -p 443:443   -v /venturan/software/nginx/nginx.conf:/etc/nginx/nginx.conf:ro   -v /venturan/web:/venturan/web:ro   -v /venturan/software/nginx/ssl:/etc/nginx/ssl:ro nginx
+    docker run -d --name ngin   -p 443:443   -v /venturan/software/nginx/nginx.conf:/etc/nginx/nginx.conf:ro   -v /venturan/web:/venturan/web:ro   -v /venturan/software/nginx/ssl:/etc/nginx/ssl:ro nginx
 8.查看启动的Docker服务
     docker ps -a
 9.重启Nginx服务

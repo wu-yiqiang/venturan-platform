@@ -17,9 +17,7 @@ export const basicComponents = [
       width: 60,
       height: 32
     },
-    privateProperties: {
-
-    }
+    privateProperties: {}
   },
   {
     label: '按钮',
@@ -31,11 +29,9 @@ export const basicComponents = [
     render: (props: any) => <ElButton>{props?.label}</ElButton>,
     key: ComponentTypeEnum.BUTTON,
     attributes: {
-      label: '按钮',
+      label: '按钮'
     },
-    privateProperties: {
-
-    }
+    privateProperties: {}
   },
   {
     label: '输入框',
@@ -62,37 +58,7 @@ export const basicComponents = [
         <Tickets />
       </el-icon>
     ),
-    render: (props: any) => (
-      <ElSelect
-        placeholder="渲染选择器"
-        {...props}
-        style={{ width: props?.width + 'px', height: props?.height + 'px' }}
-        v-model={props.value}
-        disabled={props?.disabled}
-        options={[
-          {
-            value: 'Option1',
-            label: 'Option1'
-          },
-          {
-            value: 'Option2',
-            label: 'Option2'
-          },
-          {
-            value: 'Option3',
-            label: 'Option3'
-          },
-          {
-            value: 'Option4',
-            label: 'Option4'
-          },
-          {
-            value: 'Option5',
-            label: 'Option5'
-          }
-        ]}
-      />
-    ),
+    render: (props: any) => <ElSelect placeholder="渲染选择器" {...props} style={{ width: props?.width + 'px', height: props?.height + 'px' }} v-model={props.value} disabled={props?.disabled} options={props?.options} />,
     key: ComponentTypeEnum.SELECT,
     attributes: {
       text: '选择器',
@@ -100,7 +66,29 @@ export const basicComponents = [
       value: '',
       placeholder: '请选择',
       width: 200,
-      height: 32
+      height: 32,
+      options: [
+        {
+          value: 'Option1',
+          label: 'Option1'
+        },
+        {
+          value: 'Option2',
+          label: 'Option2'
+        },
+        {
+          value: 'Option3',
+          label: 'Option3'
+        },
+        {
+          value: 'Option4',
+          label: 'Option4'
+        },
+        {
+          value: 'Option5',
+          label: 'Option5'
+        }
+      ]
     }
   }
 ]

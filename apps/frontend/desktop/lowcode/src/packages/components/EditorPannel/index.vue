@@ -22,7 +22,7 @@
           <el-form-item v-if="([ComponentTypeEnum.BUTTON, ComponentTypeEnum.TEXT].includes(block.key))" label="标签">
             <el-input v-model="block.attributes.label" />
           </el-form-item>
-           <el-form-item v-if="!([ComponentTypeEnum.BUTTON, ComponentTypeEnum.TEXT].includes(block.key))" label="禁用">
+          <el-form-item v-if="!([ComponentTypeEnum.BUTTON, ComponentTypeEnum.TEXT].includes(block.key))" label="禁用">
             <el-switch v-model="block.attributes.disabled" />
           </el-form-item>
           <el-form-item v-if="block.attributes?.placeholder?.length" label="占位符">
@@ -36,10 +36,33 @@
           </el-form-item>
         </el-form>
       </template>
+
+      <template v-if="block" #private>
+        <el-form :model="block" label-position="top">
+          <el-form-item v-if="([ComponentTypeEnum.SELECT].includes(block.key))" label="选项值">
+            <el-row>
+              <el-col v-for="(item, index) in block?.attributes?.options" :span="24" :key="index">
+                <el-row :gutter="6" style="margin-bottom: 8px;">
+                  <el-col :span="22">
+                    <el-input v-model="item.label" :key="index" @change="(value: string) => item.value = value" />
+                  </el-col>
+                  <el-col :span="2">
+                    <el-button :icon="Delete" size="small" circle @click="handleDelete(index)" />
+                  </el-col>
+                </el-row>
+              </el-col>
+            </el-row>
+            <el-button v-if="block?.attributes?.options?.every((item: any) => item.value)" text @click="handleAdd">
+              添加
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </template>
     </ButtonTab>
   </section>
 </template>
 <script lang="ts" setup>
+import { Delete } from '@element-plus/icons-vue';
 import ButtonTab from '@/components/ButtonTab/index.vue'
 import { ComponentTypeEnum } from '../../../common/const'
 const props = defineProps({
@@ -60,6 +83,12 @@ const tabs = [
 watchEffect(() => {
   console.log("block", props.block)
 })
+const handleDelete = (index: number) => {
+  props.block.attributes.options = props.block?.attributes?.options?.filter((_, ind: number) => ind !== index)
+}
+const handleAdd = () => {
+  props.block.attributes.options.push({ label: '', value: '' })
+}
 </script>
 <style lang="scss" scoped>
 .EditorPannel {
